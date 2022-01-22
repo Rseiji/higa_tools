@@ -1,0 +1,61 @@
+printf "${LGREEN}> Installing with sudo apt-get...${NC}\n"
+
+sudo -E apt-get -y update
+sudo -E apt-get -y upgrade
+sudo -E apt-get -y install tmux
+sudo -E apt-get -y install htop
+sudo -E apt-get -y install s3cmd
+
+sudo -E apt-get -y install python3
+sudo -E apt-get -y install python3-pip
+sudo -E apt-get -y install python3-venv
+
+sudo -E apt-get -y install git
+
+# Installing node
+curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install -y nodejs
+sudo apt install -y npm
+
+# Needed for pyodbc
+sudo apt-get -y install unixodbc-dev
+
+# To do: Remove dependency to seiji folder. Use environment variable with home dir
+printf "${LGREEN}>> Creating Environment...${NC}\n"
+python3 -m venv $HOME/.py3env
+echo "alias py3env='source $HOME/.py3env/bin/activate'" >> ~/.bashrc
+echo "alias tmx='tmux new -s new_session'" >> ~/.bashrc
+echo "alias jnb='py3env && jupyter notebook'" >> ~/.bashrc
+echo "alias jlb='py3env && jupyter lab'" >> ~/.bashrc
+
+## Need to be typed in terminal
+# source ~/.bashrc
+
+printf "${LGREEN}>> Installing Requirements...${NC}\n"
+source $HOME/.py3env/bin/activate
+pip install --upgrade pip
+pip install wheel
+pip install -r requirements.txt
+
+printf "${LGREEN}>> Setting up programming environments...${NC}\n"
+pip install jupyter
+pip install jupyter_contrib_nbextensions
+
+# Jupyterlab
+pip install jupyterlab
+pip install xeus-python notebook
+jupyter contrib nbextension install --user
+jupyter labextension install @jupyterlab/toc
+jupyter labextension install @jupyterlab/debugger
+jupyter labextension install jupyterlab-chart-editor
+
+pip install jupyterlab-topbar       # container extension
+pip install jupyterlab-topbar-text  # to install the topbar-text extension
+
+jupyter labextension install jupyterlab-topbar-extension \
+                             jupyterlab-system-monitor \
+                             jupyterlab-topbar-text \
+                             jupyterlab-logout \
+                             jupyterlab-theme-toggle
+

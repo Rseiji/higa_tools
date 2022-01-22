@@ -1,0 +1,35 @@
+##### Basic libraries
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+sqlalchemy
+scipy
+
+##### Machine Learning
+sklearn
+tensorflow
+torch
+keras
+xgboost
+lightgbm
+catboost
+
+##### Backend necessary
+pyarrow
+pyodbc
+psycopg2-binary
+
+##### Useful tools
+isort
+pytest
+
+##### Non official libraries
+supervenn
+
+##### Other tools
+yapf
+isort
+pylint
+
