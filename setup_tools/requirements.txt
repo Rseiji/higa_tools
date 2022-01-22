@@ -32,4 +32,4 @@ supervenn
 yapf
 isort
 pylint
-
+flake8
