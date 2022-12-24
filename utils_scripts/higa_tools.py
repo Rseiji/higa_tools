@@ -29,9 +29,10 @@ class GeneralUtils():
     def get_supervenn(sets: dict, rotate_col_annotations=False,
                       figsize=(20, 8)):
         """
-        Generates a supervenn plot, with some default configurations
-        defined by us. This way, we do not have to configure them
-        each time we want to use
+        Generate a supervenn plot.
+
+        Some default configurations defined by us. This way, we do not have
+        to configure them each time we want to use.
         
         Notes
         -----
@@ -78,4 +79,32 @@ class GeneralUtils():
             html_str+=df.to_html().replace('table','table style="display:inline"')
             html_str+='</td></th>'
         display_html(html_str,raw=True)
+
+    @staticmethod
+    def bold(string: str):
+        return '\033[1m' + string + '\033[0m'
+
+    @staticmethod
+    def underline(string: str):
+        return  '\033[4m' + string + '\033[0m'
+
+    @staticmethod
+    def underline(string: str):
+        return  '\x1B[3m' + string + '\x1B[0m'
+
+    @staticmethod
+    def red(string: str):
+        return  '\033[91m' + string + '\033[0m'
+
+    @staticmethod
+    def green(string: str):
+        return  '\033[92m' + string + '\033[0m'
+
+    @staticmethod
+    def blue(string: str):
+        return  '\033[93m' + string + '\033[0m'
+
+    @staticmethod
+    def blue(string: str):
+        return  '\033[94m' + string + '\033[0m'
 
