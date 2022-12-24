@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "editor.rulers": [71, 80, 99],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "python.linting.pylintArgs": ["--max-linelength=100"],
+    "python.linting.flake8Args": ["--max-linelength=100"]
+}
