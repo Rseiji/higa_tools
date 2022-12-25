@@ -9,9 +9,6 @@ Here are some useful links for instance setup tasks. We also have
 * Node
     * https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04-pt
 
-* Others
-    * https://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
-
 * Jupyter lab
     1. https://towardsdatascience.com/getting-the-most-out-of-jupyter-lab-9b3198f88f2d
     2. https://towardsdatascience.com/customizing-jupyter-lab-shortcuts-6857492647d2
