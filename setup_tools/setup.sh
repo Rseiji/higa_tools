@@ -26,7 +26,6 @@ sudo apt install -y npm
 # Needed for pyodbc
 sudo apt-get -y install unixodbc-dev
 
-# To do: Remove dependency to seiji folder. Use environment variable with home dir
 printf "${LGREEN}>> Creating Environment...${NC}\n"
 python3 -m venv $HOME/.py3env
 echo "alias py3env='source $HOME/.py3env/bin/activate'" >> ~/.bashrc
@@ -34,8 +33,9 @@ echo "alias tmx='tmux new -s new_session'" >> ~/.bashrc
 echo "alias jnb='py3env && jupyter notebook'" >> ~/.bashrc
 echo "alias jlb='py3env && jupyter lab'" >> ~/.bashrc
 
-## Need to be typed in terminal
-# source ~/.bashrc
+# Setting aliases...
+cp $HOME/coding/higa_tools/setup_tools/bash_aliases $HOME/.bash_aliases
+source ~/.bashrc
 
 printf "${LGREEN}>> Installing Requirements...${NC}\n"
 source $HOME/.py3env/bin/activate
@@ -64,3 +64,5 @@ jupyter labextension install jupyterlab-topbar-extension \
                              jupyterlab-logout \
                              jupyterlab-theme-toggle
 
+bash $HOME/coding/higa_tools/settings/jupyter_lab/setup.sh
+bash $HOME/coding/higa_tools/settings/jupyter_notebook/setup_enable.sh
