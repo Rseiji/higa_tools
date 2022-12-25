@@ -1,0 +1,16 @@
+Softwares to install
+--------------------
+
+When setting up a new ubuntu environment on local machine, here are some useful applications to install!
+
+    * vscode
+    * okular
+    * spotify
+    * zoom
+    * postman
+    * vlc media player
+    * sublime
+    * brave
+    * chrome
+    * libreoffice
+
