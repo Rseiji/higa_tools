@@ -12,6 +12,9 @@ sudo -E apt-get -y install python3-venv
 
 sudo -E apt-get -y install git
 
+# Installing Docker
+sudo snap install docker
+
 # Installing node
 curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
