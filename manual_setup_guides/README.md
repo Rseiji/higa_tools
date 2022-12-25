@@ -14,8 +14,6 @@ Here are some useful links for instance setup tasks. We also have
     2. https://towardsdatascience.com/customizing-jupyter-lab-shortcuts-6857492647d2
     3. https://towardsdatascience.com/jupyter-workflow-for-data-scientists-d1ce05d67717
     
-    
-    
 * Jupyter lab setup
 Go to `Settings > Advanced settings > Keyboard Shortcuts` and add the following user settings, gotten from 2.
 
