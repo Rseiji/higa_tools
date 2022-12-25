@@ -1,5 +1,6 @@
 # higa_tools
 
-This repository contains general scripts, setup scripts, setup configurations for
-environments, useful links and others, that I created or searched in the web in
-order to improve my coding productivity.
+This repository contains general setup scripts, configurations suggestions for
+environments, useful links and preferences, etc.
+
+The reason for this repository is to improve my general working productivity in anything related to computers and/or coding.
