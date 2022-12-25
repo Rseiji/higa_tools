@@ -1,3 +1,5 @@
+#!/bin/bash
+
 printf "${LGREEN}> Installing with sudo apt-get...${NC}\n"
 
 sudo -E apt-get -y update
