@@ -89,3 +89,11 @@ sudo apt-get update
 sudo apt-get install -y sublime-text
 
 echo "Sublime is now installed!"
+
+
+## Download Japanese Mozc font keyboard
+# https://askubuntu.com/questions/1267595/cannot-find-japanesemozc-or-japaneseanthy-in-20-04
+# Obs: you have to restart your pc before using this keyboard setup.
+sudo apt-get -y install mozc-utils-gui
+sudo apt-get -y install ibus-mozc
+sudo apt-get -y install ibus-anthy
