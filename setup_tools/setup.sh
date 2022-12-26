@@ -66,3 +66,6 @@ jupyter labextension install jupyterlab-topbar-extension \
 
 bash $HOME/coding/higa_tools/settings/jupyter_lab/setup.sh
 bash $HOME/coding/higa_tools/settings/jupyter_notebook/setup_enable.sh
+
+# Tmux settings
+bash $HOME/coding/higa_tools/settings/tmux/setup.sh
