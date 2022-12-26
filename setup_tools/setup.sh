@@ -34,7 +34,7 @@ echo "alias jnb='py3env && jupyter notebook'" >> ~/.bashrc
 echo "alias jlb='py3env && jupyter lab'" >> ~/.bashrc
 
 # Setting aliases...
-cp $HOME/coding/higa_tools/setup_tools/bash_aliases $HOME/.bash_aliases
+cp $HOME/coding/higa_tools/settings/terminal/bash_aliases $HOME/.bash_aliases
 source ~/.bashrc
 
 printf "${LGREEN}>> Installing Requirements...${NC}\n"
