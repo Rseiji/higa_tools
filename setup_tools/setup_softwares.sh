@@ -41,6 +41,7 @@ sudo apt-get install code
 sudo apt-get clean
 bash $HOME/coding/higa_tools/settings/vscode/setup.sh
 
+
 ## Zoom Installation
 echo "Installing Zoom..."
 sudo apt update

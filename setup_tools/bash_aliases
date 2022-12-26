@@ -1,4 +1,4 @@
 alias py3env='source $HOME/.py3env/bin/activate'
-alias tmx='tmux new -s new_session'
-alias jnb='py3env && jupyter notebook'
-alias jlb='py3env && jupyter lab'
+alias tmx='tmux new -s higa'
+alias jnb='py3env && jupyter notebook --no-browser'
+alias jlb='py3env && jupyter lab --no-browser'
