@@ -4,6 +4,6 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "/home/seiji/coding/:/root/coding"
+      - "../../:/root/coding"
     stdin_open: true
     tty: true
