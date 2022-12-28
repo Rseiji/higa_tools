@@ -42,6 +42,7 @@ source $HOME/.py3env/bin/activate
 pip install --upgrade pip
 pip install wheel
 pip install -r requirements.txt
+pip install dask[complete]
 
 printf "${LGREEN}>> Setting up programming environments...${NC}\n"
 pip install jupyter

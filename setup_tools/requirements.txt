@@ -6,6 +6,8 @@ seaborn
 plotly
 sqlalchemy
 scipy
+dask
+dask-ml
 
 ##### Machine Learning
 sklearn
