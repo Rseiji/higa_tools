@@ -44,6 +44,12 @@ pip install wheel
 pip install -r requirements.txt
 pip install dask[complete]
 
+# https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04-pt
+printf "${LGREEN}>> Setting up node & npm...${NC}\n"
+sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+
 printf "${LGREEN}>> Setting up programming environments...${NC}\n"
 pip install jupyter
 pip install jupyter_contrib_nbextensions
