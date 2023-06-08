@@ -1,0 +1,3 @@
+Jupyter Notebook - how to add a snippet
+
+* In nbextensions menu, the snippets extension section has a form space to insert a json. It is possible to create a template there.
