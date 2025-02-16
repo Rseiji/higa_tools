@@ -21,3 +21,7 @@ mkdir $HOME/.zsh
 cd .zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions
 echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+
+# Include Aliases
+echo "source ~/higa_tools/settings/bash_aliases" >> ~/.zshrc
+source ~/.zshrc

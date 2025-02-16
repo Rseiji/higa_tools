@@ -1,0 +1,48 @@
+# Useful if 'del' is installed
+alias rm='echo "rm is disabled, use del"'
+alias del='mv -t ~/.trash/'
+
+# Verify if other users are connected to a machine
+alias ausers='ps aux | grep "sshd"'
+
+alias adog='git log --all --decorate --oneline --graph'
+alias dog='git log --decorate --oneline --graph'
+alias pyt='pytest -vs --disable-warnings'
+
+# Clean ALL docker environment
+alias docker-clean-all='docker rm -f $(docker ps -a -q) && docker volume rm $(docker volume ls -q) && docker rmi -f $(docker images -a -q)'
+
+
+# virtualenv aliases
+alias venv='source ~/home/ubuntu/.venv/bin/activate'
+
+
+# Function to apply isort, flake8 and mypy to given files
+apply_linters() {
+    for file in "$@"; do
+        echo "Processing $file"
+        echo "================"
+        isort "$file"
+        flake8 "$file"
+        mypy "$file"
+        codespell "$file"
+        black "$file"
+    done
+}
+
+create_notebook_file() {
+    base_name="$(date +%Y%m%d) fill_my_name"
+    extension=".ipynb"
+    file_name="${base_name}${extension}"
+    counter=1
+
+    while [ -e "$file_name" ]; do
+        file_name="${base_name}_${counter}${extension}"
+        ((counter++))
+    done
+
+    touch "$file_name"
+    echo "Created notebook: $file_name"
+}
+
+alias cnb='create_notebook_file'
