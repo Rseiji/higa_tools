@@ -14,7 +14,7 @@ alias docker-clean-all='docker rm -f $(docker ps -a -q) && docker volume rm $(do
 
 
 # virtualenv aliases
-alias venv='source ~/home/ubuntu/.venv/bin/activate'
+alias venv='source /home/ubuntu/.venv/bin/activate'
 
 
 # Function to apply isort, flake8 and mypy to given files
