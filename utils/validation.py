@@ -1,8 +1,9 @@
 """Utilities for data validation."""
 
 from itertools import chain, combinations
-import pandas as pd
 from typing import Any
+
+import pandas as pd
 
 
 def validate_df_by_default(
@@ -39,7 +40,7 @@ def _profile_rowsize(
 
 def _profile_duplicated_columns(
     df: pd.DataFrame,
-    config: [str, Any]
+    config: dict[str, Any]
 ) -> pd.DataFrame:
     if subset := config.get("subset"):
         columns_combinations = subset
