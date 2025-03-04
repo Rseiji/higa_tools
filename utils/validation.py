@@ -2,8 +2,13 @@
 
 from itertools import chain, combinations
 import pandas as pd
+from typing import Any
 
-def validate_df_by_default(df: pd.DataFrame) -> pd.DataFrame:
+
+def validate_df_by_default(
+    df: pd.DataFrame,
+    config: dict[str, Any] = None
+) -> pd.DataFrame:
     """Run some default validations on a pd.DataFrame.
 
     Parameters
@@ -11,45 +16,67 @@ def validate_df_by_default(df: pd.DataFrame) -> pd.DataFrame:
     df: pd.DataFrame
         A pandas DataFrame to validate
     """
+    config = config or {}
+
     validations_frame = {}
     for validation in [
-        lambda df: {"rowsize": df.shape[0],},
+        _profile_rowsize,
         _profile_duplicated_columns,
         _profile_columns_maxmin,
         _profile_none_count,
         _profile_string_columns_with_limit,
     ]:
-        validations_frame.update(validation(df))
+        validations_frame.update(validation(df, config))
     return pd.DataFrame.from_dict(validations_frame, orient='index')
 
 
-def _profile_duplicated_columns(df):
-    # Generate all combinations of lengths 1 to the length of the list
-    columns_combinations = [
-        list(combinations(df.columns, i)) for i in range(1, len(df.columns) + 1)
-    ]
-    columns_combinations = [list(x) for x in chain(*columns_combinations)]
-    combinations_with_duplicates = []
+def _profile_rowsize(
+    df: pd.DataFrame,
+    config: dict[str, Any] = None
+) -> pd.DataFrame:
+    return {"rowsize": df.shape[0]}
 
+
+def _profile_duplicated_columns(
+    df: pd.DataFrame,
+    config: [str, Any]
+) -> pd.DataFrame:
+    if subset := config.get("subset"):
+        columns_combinations = subset
+    else:
+        # Generate all combinations of lengths 1 to the length of the list
+        columns_combinations = [
+            list(combinations(df.columns, i)) for i in range(1, len(df.columns) + 1)
+        ]
+        columns_combinations = [list(x) for x in chain(*columns_combinations)]
+
+    combinations_with_duplicates = []
     for columns_combination in columns_combinations:
         if df[columns_combination].duplicated().any():
             combinations_with_duplicates.append([columns_combination])
     return {"columns_subsets_with_duplicates": combinations_with_duplicates}
 
 
-def _profile_string_columns_with_limit(df, limit_records=10):
+def _profile_string_columns_with_limit(
+    df: pd.DataFrame,
+    config: dict[str, Any] = None
+) -> pd.DataFrame:
+    limit_records = 10
     output = {}
     for column in df.columns:
         if pd.api.types.is_string_dtype(df[column]):
             output.update(
                 {
-                    f"{column}_col_str_values": df[column].unique(),
+                    f"{column}_col_str_values": df[column].unique()[:limit_records],
                 }
             )
     return output
 
 
-def _profile_columns_maxmin(df):
+def _profile_columns_maxmin(
+    df: pd.DataFrame,
+    config: dict[str, Any] = None
+) -> pd.DataFrame:
     output = {}
     for column in df.columns:
         if pd.api.types.is_numeric_dtype(df[column]):
@@ -62,7 +89,10 @@ def _profile_columns_maxmin(df):
     return output
 
 
-def _profile_none_count(df):
+def _profile_none_count(
+    df: pd.DataFrame,
+    config: dict[str, Any] = None
+) -> pd.DataFrame:
     output = {}
     for column in df.columns:
         output.update(
