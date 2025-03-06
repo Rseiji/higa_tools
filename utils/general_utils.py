@@ -55,19 +55,23 @@ def get_supervenn(
     )
 
 
-def display_ax1(*args, titles=cycle([""])):
-    """Display pandas dataframes side by side in notebook output, like axis=1 from pandas.
+def display_ax1(*dfs: pd.DataFrame, titles=()) -> None:
+    """Display two dataframes side by side.
 
-    Notes
-    -----
-    Source: https://stackoverflow.com/questions/38783027/jupyter-notebook-display-two-pandas-tables-side-by-side
+    Parameters
+    ----------
+    dfs : pd.DataFrame
+        Tables to display.
+    titles : tuple, optional
+        Titles for the tables.
     """
-    html_str = ""
-    for df, title in zip(args, chain(titles, cycle(["</br>"]))):
-        html_str += '<th style="text-align:center"><td style="vertical-align:top">'
-        html_str += f"<h2>{title}</h2>"
-        html_str += df.to_html().replace("table", 'table style="display:inline"')
-        html_str += "</td></th>"
+    html_str = ''
+    for i, df in enumerate(dfs):
+        title = titles[i] if i < len(titles) else ''
+        html_str += '<div style="display:inline-block; margin-right:20px;">'
+        html_str += f'<h3>{title}</h3>'
+        html_str += df.to_html()
+        html_str += '</div>'
     display_html(html_str, raw=True)
 
 
