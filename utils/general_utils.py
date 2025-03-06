@@ -112,3 +112,16 @@ def serie_parallel(func, arg_tuples, mode="series", n_jobs=-1):
     else:
         raise ValueError("Invalid mode. Mode must be 'series' or 'parallel'.")
     return results
+
+
+def get_dummy_df(mode: str = "abc"):
+    dfs = {
+        "abc": pd.DataFrame(
+            {
+                "a": [1, 2, 3],
+                "b": [4, 5, 6],
+                "c": [7, 8, 9],
+            }
+        ),
+    }
+    return dfs[mode]
