@@ -1,14 +1,10 @@
-"""Utilities for data validation."""
-
-from itertools import chain, combinations
-from typing import Any
-
 import pandas as pd
-
+from itertools import combinations, chain
+from typing import Any, Dict
 
 def validate_df_by_default(
     df: pd.DataFrame,
-    config: dict[str, Any] = None
+    config: Dict[str, Any] = None
 ) -> pd.DataFrame:
     """Run some default validations on a pd.DataFrame.
 
@@ -19,7 +15,7 @@ def validate_df_by_default(
     """
     config = config or {}
 
-    validations_frame = {}
+    validations_frame = []
     for validation in [
         _profile_rowsize,
         _profile_duplicated_columns,
@@ -27,21 +23,24 @@ def validate_df_by_default(
         _profile_none_count,
         _profile_string_columns_with_limit,
     ]:
-        validations_frame.update(validation(df, config))
-    return pd.DataFrame.from_dict(validations_frame, orient='index')
+        validation_results = validation(df, config)
+        for key, value in validation_results.items():
+            validations_frame.append({"validation": key, "result": value})
+
+    return pd.DataFrame(validations_frame)
 
 
 def _profile_rowsize(
     df: pd.DataFrame,
-    config: dict[str, Any] = None
-) -> pd.DataFrame:
+    config: Dict[str, Any] = None
+) -> Dict[str, Any]:
     return {"rowsize": df.shape[0]}
 
 
 def _profile_duplicated_columns(
     df: pd.DataFrame,
-    config: dict[str, Any]
-) -> pd.DataFrame:
+    config: Dict[str, Any]
+) -> Dict[str, Any]:
     if subset := config.get("subset"):
         columns_combinations = subset
     else:
@@ -54,14 +53,14 @@ def _profile_duplicated_columns(
     combinations_with_duplicates = []
     for columns_combination in columns_combinations:
         if df[columns_combination].duplicated().any():
-            combinations_with_duplicates.append([columns_combination])
+            combinations_with_duplicates.append(columns_combination)
     return {"columns_subsets_with_duplicates": combinations_with_duplicates}
 
 
 def _profile_string_columns_with_limit(
     df: pd.DataFrame,
-    config: dict[str, Any] = None
-) -> pd.DataFrame:
+    config: Dict[str, Any] = None
+) -> Dict[str, Any]:
     limit_records = 10
     output = {}
     for column in df.columns:
@@ -76,8 +75,8 @@ def _profile_string_columns_with_limit(
 
 def _profile_columns_maxmin(
     df: pd.DataFrame,
-    config: dict[str, Any] = None
-) -> pd.DataFrame:
+    config: Dict[str, Any] = None
+) -> Dict[str, Any]:
     output = {}
     for column in df.columns:
         if pd.api.types.is_numeric_dtype(df[column]):
@@ -92,8 +91,8 @@ def _profile_columns_maxmin(
 
 def _profile_none_count(
     df: pd.DataFrame,
-    config: dict[str, Any] = None
-) -> pd.DataFrame:
+    config: Dict[str, Any] = None
+) -> Dict[str, Any]:
     output = {}
     for column in df.columns:
         output.update(
