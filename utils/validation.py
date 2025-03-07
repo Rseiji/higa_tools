@@ -1,6 +1,25 @@
 import pandas as pd
 from itertools import combinations, chain
 from typing import Any, Dict
+from .general_utils import display_ax1
+
+
+def validate_twice(
+    df1: pd.DataFrame,
+    df2: pd.DataFrame,
+    config: Dict[str, Any] = None
+) -> None:
+    """Validate two dataframes.
+
+    Parameters
+    ----------
+    df1 : pd.DataFrame
+        A pandas DataFrame to validate
+    df2 : pd.DataFrame
+        A pandas DataFrame to validate
+    """
+    return validate_df_by_default(df1, config).merge(validate_df_by_default(df2, config), how='outer', on="validation", suffixes=('_df1', '_df2'))
+
 
 def validate_df_by_default(
     df: pd.DataFrame,
