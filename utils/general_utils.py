@@ -45,6 +45,9 @@ def get_supervenn(
     -----
     Supervenn is a library developed by ``https://github.com/gecko984/supervenn``.
     """
+    for key, value in sets.items():
+        sets[key] = set(value)
+
     plt.figure(figsize=figsize)
     supervenn(
         list(sets.values()),
