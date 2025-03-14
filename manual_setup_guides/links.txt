@@ -1,0 +1,5 @@
+* Installing notebook PDF conversion issue
+    * ModuleNotFoundError: No module named 'notebook.services'
+        * https://discourse.jupyter.org/t/no-module-named-notebook-services/30766/2
+    * nbconvert.utils.pandoc.PandocMissing: Pandoc wasn't found.
+        * https://stackoverflow.com/a/36598582
