@@ -46,3 +46,27 @@ create_notebook_file() {
 }
 
 alias cnb='create_notebook_file'
+
+alias note2pdf='jupyter nbconvert --to pdf --no-input'
+
+# Alias for aws s3 ls
+alias s3_ls='aws s3 ls'
+
+# Function to wrap aws s3 rm with a confirmation prompt
+aws_s3_rm() {
+    if [[ "$1" == "-y" ]]; then
+        shift
+        aws s3 rm "$@"
+    else
+        read -p "Are you sure you want to delete $*? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            aws s3 rm "$@"
+        else
+            echo "Deletion aborted."
+        fi
+    fi
+}
+
+# Alias to use the function
+alias s3_rm=aws_s3_rm
