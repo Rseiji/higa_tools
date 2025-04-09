@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from IPython.display import display_html
 from supervenn import supervenn
+from contextlib import contextmanager
 
 
 def bold(string: str):
@@ -128,3 +129,41 @@ def get_dummy_df(mode: str = "abc"):
         ),
     }
     return dfs[mode]
+
+
+@contextmanager
+def track_time():
+    """Context manager to track the execution time of a code block.
+
+    Usage
+    -----
+    with track_time() as t:
+        # Your code here
+        time.sleep(2)
+    print(f"Execution time: {t:.2f} seconds")
+    """
+    import time
+
+    start_time = time.time()
+    yield lambda: time.time() - start_time
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Execution time: {elapsed_time:.2f} seconds")
+
+
+@contextmanager
+def tem_variable_assign(obj, key, temp_value):
+    """Temporarily assign a value to an object's attribute.
+
+    Usage
+    -----
+    with tem_variable_assign(obj, key, temp_value):
+        # Your code here
+        pass
+    """
+    original = getattr(obj, key)
+    setattr(obj, key, temp_value)
+    try:
+        yield
+    finally:
+        setattr(obj, key, original)
